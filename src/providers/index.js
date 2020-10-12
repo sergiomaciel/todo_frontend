@@ -6,25 +6,25 @@ const httpClient = fetchUtils.fetchJson;
 
 export default {
     getList: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify(params.filter),
-        };
-        // const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        // console.log("URL => "+url);
+        // const { page, perPage } = params.pagination;
+        // const { field, order } = params.sort;
+        // const query = {
+        //     sort: JSON.stringify([field, order]),
+        //     range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+        //     filter: JSON.stringify(params.filter),
+        // };
 
-        const filtros = stringify(params.filter);
-        var urlFiltros = new String();
+        const filtros = params.filter;
+        var urlFiltros = '';
 
         for ( var key in filtros ) {
-            urlFiltros = `${key.toString()}=${filtros[key]}&`;
+            urlFiltros += key != null 
+            ? `${key}=${filtros[key]}&`
+            : '';
         }
 
-        console.log("FILTROS => "+filtros);
-        const url = `${apiUrl}/${resource}?`+urlFiltros;
+        console.log(`FILTROS => ${urlFiltros}`);
+        const url = `${apiUrl}/${resource}?${urlFiltros}`;
         console.log("URL => "+url);
         return httpClient(url).then(({ headers, json }) => ({
             data: json,

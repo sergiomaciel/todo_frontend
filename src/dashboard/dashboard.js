@@ -4,6 +4,6 @@ import { Card, CardContent, CardHeader } from '@material-ui/core';
 export default () => (
     <Card>
         <CardHeader title="Welcome..." />
-        <CardContent>Prox graafics...</CardContent>
+        <CardContent>Proximanate gráfico...</CardContent>
     </Card>
 );

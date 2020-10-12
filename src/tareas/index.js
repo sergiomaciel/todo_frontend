@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useMediaQuery } from '@material-ui/core';
+import TaskIcon from '@material-ui/icons/Work';
 import RichTextInput from 'ra-input-rich-text';
 import { 
     List,
@@ -14,6 +15,7 @@ import {
     Tab, 
     TabbedShowLayout,
     EditButton, 
+    ShowButton,
     SimpleForm,
     SelectField ,
     SelectInput,
@@ -38,9 +40,9 @@ const validateData = (values) => {
 
 const TareaFilter = (props) => (
     <Filter {...props}>
-        {/* <TextInput label="Search" source="q" alwaysOn /> */}
-        <TextInput label="Descripcion" source="descripcion" alwaysOn />
-        {/* <SelectField 
+        <TextInput label="Id" source="id"/>
+        <TextInput label="Descripcion" source="descripcion"/>
+        <SelectInput  
             label="Estado" 
             source="estado" 
             choices={[
@@ -48,7 +50,7 @@ const TareaFilter = (props) => (
                 { id: 2, name: 'Pendiente' },
                 { id: 3, name: 'Trabajando' },
             ]} 
-        /> */}
+        />
     </Filter>
 );
 
@@ -57,9 +59,6 @@ export const TareaList = (props) => {
     return (
         <List {...props} filters={<TareaFilter/>} >
             {isSmall ? (
-                        // <SimpleList
-                        //     primaryText={record => record.id}
-                        // />
                         <Datagrid>
                             <TextField source="id" />
                             <TextField source="estado" />
@@ -74,7 +73,7 @@ export const TareaList = (props) => {
                                { id: 2, name: 'Pendiente' },
                                { id: 3, name: 'Trabajando' },
                             ]} />
-                            <EditButton />
+                            <EditButton label={'Ver'}/>
                         </Datagrid>
                     )}
         </List>
